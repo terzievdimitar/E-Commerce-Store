@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema(
 					required: [true, 'Quantity is required'],
 					default: 1,
 				},
-				prodcut: {
+				product: {
 					type: mongoose.Schema.Types.ObjectId,
 					ref: 'Product',
 				},
