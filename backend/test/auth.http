@@ -1,0 +1,26 @@
+POST http://localhost:3000/api/auth/signup
+Content-Type: application/json
+
+{
+    "email": "mitko@bg.com",
+    "password": "12345678",
+    "name": "mitko"
+}
+
+###
+
+POST http://localhost:3000/api/auth/logout
+
+###
+
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+    "email": "mitko@bg.com",
+    "password": "12345678"
+}
+
+###
+
+POST http://localhost:3000/api/auth/refresh-token
