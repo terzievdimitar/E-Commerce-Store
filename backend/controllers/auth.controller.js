@@ -54,8 +54,13 @@ export const signup = async (req, res) => {
 			user: { id: newUser._id, name: newUser.name, email: newUser.email, role: newUser.role },
 		});
 	} catch (error) {
+		let message = error.message;
+		// If it's a Mongoose validation error, get the first error message
+		if (error.name === 'ValidationError') {
+			message = Object.values(error.errors)[0].message;
+		}
 		res.status(500).json({
-			message: 'Error creating user',
+			message,
 			error: error.message,
 		});
 	}
@@ -81,8 +86,13 @@ export const login = async (req, res) => {
 			return res.status(401).json({ message: 'Invalid email or password' });
 		}
 	} catch (error) {
+		let message = error.message;
+		// If it's a Mongoose validation error, get the first error message
+		if (error.name === 'ValidationError') {
+			message = Object.values(error.errors)[0].message;
+		}
 		res.status(500).json({
-			message: 'Invalid email or password',
+			message,
 			error: error.message,
 		});
 	}
@@ -101,7 +111,15 @@ export const logout = async (req, res) => {
 		res.clearCookie('refreshToken');
 		res.status(200).json({ message: 'Logged out successfully' });
 	} catch (error) {
-		res.status(500).json({ message: 'Error logging out', error: error.message });
+		let message = error.message;
+		// If it's a Mongoose validation error, get the first error message
+		if (error.name === 'ValidationError') {
+			message = Object.values(error.errors)[0].message;
+		}
+		res.status(500).json({
+			message,
+			error: error.message,
+		});
 	}
 };
 
