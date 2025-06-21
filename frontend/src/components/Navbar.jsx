@@ -2,8 +2,8 @@ import { ShoppingCart, UserPlus, LogIn, LogOut, Lock } from 'lucide-react';
 import { Link } from 'react-router';
 
 const Navbar = () => {
-	const user = true; // Replace with actual user state management
-	const isAdmin = true;
+	const user = false; // Replace with actual user state management
+	const isAdmin = false;
 
 	return (
 		<header className='fixed top-0 left-0 w-full Obg-gray-900 bg-opacity-90 backdrop-blur-md shadow-1g z-40 transition-all duration-300 border-b border-emerald-800'>
