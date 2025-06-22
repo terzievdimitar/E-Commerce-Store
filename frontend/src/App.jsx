@@ -8,7 +8,6 @@ import LoadingSpinner from './components/LoadingSpinner';
 import { Toaster } from 'react-hot-toast';
 import { useUserStore } from './stores/useUserStores';
 import { useEffect } from 'react';
-import { i } from 'framer-motion/client';
 
 function App() {
 	const { user, checkAuth, checkingAuth } = useUserStore();
