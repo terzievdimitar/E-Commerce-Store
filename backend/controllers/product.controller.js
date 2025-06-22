@@ -45,26 +45,26 @@ export const getFeaturedProducts = async (_, res) => {
 
 export const createProduct = async (req, res) => {
 	try {
-		const { name, price, description, image, category } = req.body;
+		const { name, description, price, image, category } = req.body;
 
 		let cloudinaryResponse = null;
 
 		if (image) {
-			await cloudinary.uploader.upload(image, { folder: 'products' }); // Upload image to Cloudinary in 'products' folder
+			cloudinaryResponse = await cloudinary.uploader.upload(image, { folder: 'products' });
 		}
 
-		const newPoduct = new Product.create({
+		const product = await Product.create({
 			name,
-			price,
 			description,
+			price,
 			image: cloudinaryResponse?.secure_url ? cloudinaryResponse.secure_url : '',
 			category,
 		});
 
-		res.status(201).json(newPoduct);
+		res.status(201).json(product);
 	} catch (error) {
-		console.error('Error creating product:', error);
-		res.status(500).json({ message: 'Error creating product', error: error.message });
+		console.log('Error in createProduct controller', error.message);
+		res.status(500).json({ message: 'Server error', error: error.message });
 	}
 };
 

@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { PlusCircle, Upload, Loader } from 'lucide-react';
+import { useProductStore } from '../stores/useProductStore';
 
 const categories = ['jeans', 't-shirts', 'shoes', 'glasses', 'jackets', 'suits', 'bags'];
 
 const CreateProductForm = () => {
-	const loading = false; // Replace with actual loading state if needed
 	const [newProduct, setNewProduct] = useState({
 		name: '',
 		description: '',
@@ -14,9 +14,22 @@ const CreateProductForm = () => {
 		image: '',
 	});
 
-	const handleSubmit = (e) => {
+	const { createProduct, loading } = useProductStore();
+
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log('Product created:', newProduct);
+		try {
+			await createProduct(newProduct);
+			setNewProduct({
+				name: '',
+				description: '',
+				price: '',
+				category: '',
+				image: '',
+			});
+		} catch (error) {
+			console.error('Error creating product:', error);
+		}
 	};
 
 	const handleImageChange = (e) => {

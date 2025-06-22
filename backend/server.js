@@ -16,7 +16,7 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT;
 
-app.use(express.json());
+app.use(express.json({ limit: '50mb' })); // Increased limit for large payloads
 app.use(cookieParser());
 
 app.use('/api/auth', authRoutes);
