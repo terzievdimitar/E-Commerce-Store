@@ -114,7 +114,7 @@ export const getRecommendedProducts = async (_, res) => {
 			},
 		]);
 
-		res.json(products);
+		res.json({ products });
 	} catch (error) {
 		console.error('Error fetching recommended products:', error);
 		res.status(500).json({ message: 'Error fetching recommended products', error: error.message });
@@ -125,7 +125,7 @@ export const getProductByCategory = async (req, res) => {
 	const { category } = req.params;
 	try {
 		const products = await Product.find({ category });
-		res.status(200).json(products);
+		res.status(200).json({ products });
 	} catch (error) {
 		console.error('Error fetching products by category:', error);
 		res.status(500).json({ message: 'Error fetching products by category', error: error.message });
