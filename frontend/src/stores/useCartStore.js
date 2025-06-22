@@ -7,6 +7,7 @@ export const useCartStore = create((set, get) => ({
 	coupon: null,
 	total: 0,
 	subtotal: 0,
+	isCouponApplied: false,
 
 	getCartItems: async () => {
 		try {
@@ -15,7 +16,6 @@ export const useCartStore = create((set, get) => ({
 			get().calculateTotals();
 		} catch (error) {
 			set({ cart: [] });
-			toast.error(error.response?.data?.error || 'Failed to fetch cart items');
 		}
 	},
 
