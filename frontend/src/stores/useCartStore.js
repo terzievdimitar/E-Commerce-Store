@@ -37,6 +37,28 @@ export const useCartStore = create((set, get) => ({
 		}
 	},
 
+	removeFromCart: async (productId) => {
+		await axios.delete(`/cart`, { data: { productId } });
+		set((prevState) => ({
+			cart: prevState.cart.filter((item) => item._id !== productId),
+		}));
+		get().calculateTotals();
+		toast.success('Product removed from cart', { id: 'remove-from-cart' });
+	},
+
+	updateQuantity: async (productId, quantity) => {
+		if (quantity === 0) {
+			return get().removeFromCart(productId);
+		}
+
+		await axios.put(`/cart/${productId}`, { quantity });
+		set((prevState) => ({
+			cart: prevState.cart.map((item) => (item._id === productId ? { ...item, quantity } : item)),
+		}));
+
+		get().calculateTotals();
+	},
+
 	// utility funnction to calculate totals
 	calculateTotals: () => {
 		const { cart, coupon } = get();
