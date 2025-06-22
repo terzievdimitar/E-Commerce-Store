@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import CartItem from '../components/CartItem';
 import PeopleAlsoBought from '../components/PeopleAlsoBought';
 import OrderSummary from '../components/OrderSummary';
+import GiftCouponCard from '../components/GiftCouponCard';
 import { ShoppingCart } from 'lucide-react';
 import { Link } from 'react-router';
 
@@ -23,7 +24,7 @@ const CartPage = () => {
 							<div className='space-y-6'>
 								{cart.map((item) => (
 									<CartItem
-										key={item.id}
+										key={item._id}
 										item={item}
 									/>
 								))}
@@ -40,7 +41,7 @@ const CartPage = () => {
 							transition={{ duration: 0.5, delay: 0.4 }}>
 							<OrderSummary />
 
-							{/* <GiftCouponCard/> */}
+							<GiftCouponCard />
 						</motion.div>
 					)}
 				</div>
