@@ -1,7 +1,6 @@
 import { create } from 'zustand';
 import toast from 'react-hot-toast';
 import axios from '../lib/axios';
-import { s } from 'framer-motion/client';
 
 export const useCartStore = create((set, get) => ({
 	cart: [],
@@ -23,10 +22,10 @@ export const useCartStore = create((set, get) => ({
 	addToCart: async (product) => {
 		try {
 			await axios.post('/cart', { productId: product._id });
-			toast.success('Product added to cart');
+			toast.success('Product added to cart', { id: 'add-to-cart' });
 
 			set((prevState) => {
-				const existingItem = prevState.cart.find((item) => item.product._id === product._id);
+				const existingItem = prevState.cart.find((item) => item._id === product._id);
 				const newCart = existingItem
 					? prevState.cart.map((item) => (item._id === product._id ? { ...item, quantity: item.quantity + 1 } : item))
 					: [...prevState.cart, { ...product, quantity: 1 }];
@@ -34,7 +33,7 @@ export const useCartStore = create((set, get) => ({
 			});
 			get().calculateTotals();
 		} catch (error) {
-			toast.error(error.response?.data?.error || 'Failed to add product to cart');
+			toast.error(error.response.data.message || 'An error occurred');
 		}
 	},
 
