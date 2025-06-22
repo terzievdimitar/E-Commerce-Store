@@ -36,8 +36,8 @@ const SignUpPage = () => {
 				transition={{ duration: 0.8, delay: 0.2 }}>
 				<div className='bg-gray-800 py-8 px-4 shadow sm:rounded-lg sm:px-10'>
 					<form
-						className='space-y-6'
-						onSubmit={handleSubmit}>
+						onSubmit={handleSubmit}
+						className='space-y-6'>
 						<div>
 							<label
 								htmlFor='name'
@@ -63,6 +63,7 @@ const SignUpPage = () => {
 								/>
 							</div>
 						</div>
+
 						<div>
 							<label
 								htmlFor='email'
@@ -164,11 +165,12 @@ const SignUpPage = () => {
 										className='mr-2 h-5 w-5'
 										aria-hidden='true'
 									/>
-									Sign Up
+									Sign up
 								</>
 							)}
 						</button>
 					</form>
+
 					<p className='mt-8 text-center text-sm text-gray-400'>
 						Already have an account?{' '}
 						<Link
@@ -182,5 +184,4 @@ const SignUpPage = () => {
 		</div>
 	);
 };
-
 export default SignUpPage;
