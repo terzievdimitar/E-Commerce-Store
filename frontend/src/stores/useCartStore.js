@@ -21,7 +21,7 @@ export const useCartStore = create((set, get) => ({
 		}
 	},
 
-	addToCart: async (product) => {
+	addToCart: async (product, navigate) => {
 		try {
 			await axios.post('/cart', { productId: product._id });
 			toast.success('Product added to cart', { id: 'add-to-cart' });
@@ -35,7 +35,10 @@ export const useCartStore = create((set, get) => ({
 			});
 			get().calculateTotals();
 		} catch (error) {
-			toast.error(error.response.data.message || 'An error occurred');
+			if (error.response && error.response.status === 401 && navigate) {
+				navigate('/login');
+			}
+			toast.error('Please login to add products to cart', { id: 'add-to-cart-error' });
 		}
 	},
 
