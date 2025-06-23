@@ -7,6 +7,7 @@ import AdminPage from './pages/AdminPage';
 import CategoryPage from './pages/CategoryPage';
 import CartPage from './pages/CartPage';
 import LoadingSpinner from './components/LoadingSpinner';
+import PurchaseSuccessPage from './pages/PurchaseSuccessPage';
 import { Toaster } from 'react-hot-toast';
 import { useUserStore } from './stores/useUserStores';
 import { useEffect } from 'react';
@@ -63,6 +64,10 @@ function App() {
 					<Route
 						path='/cart'
 						element={user ? <CartPage /> : <Navigate to='/login' />}
+					/>
+					<Route
+						path='/purchase-success'
+						element={user ? <PurchaseSuccessPage /> : <Navigate to='/login' />}
 					/>
 				</Routes>
 			</div>
