@@ -37,7 +37,7 @@ const FeaturedProducts = ({ featuredProducts }) => {
 	return (
 		<div className='py-12'>
 			<div className='container mx-auto px-4'>
-				<h2 className='text-center text-5xl sm:text-6xl font-bold text-emerald-400 mb-4'>Featured</h2>
+				<h2 className='text-center text-5xl sm:text-6xl font-bold text-orange-400 mb-4'>Featured</h2>
 				<div className='relative'>
 					<div className='overflow-hidden'>
 						<div
@@ -57,10 +57,10 @@ const FeaturedProducts = ({ featuredProducts }) => {
 										</div>
 										<div className='p-4'>
 											<h3 className='text-lg font-semibold mb-2 text-white'>{product.name}</h3>
-											<p className='text-emerald-300 font-medium mb-4'>${product.price.toFixed(2)}</p>
+											<p className='text-orange-300 font-medium mb-4'>${product.price.toFixed(2)}</p>
 											<button
 												onClick={() => addToCart(product)}
-												className='w-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-2 px-4 rounded transition-colors duration-300 
+												className='w-full bg-orange-600 hover:bg-orange-500 text-white font-semibold py-2 px-4 rounded transition-colors duration-300 
 												flex items-center justify-center'>
 												<ShoppingCart className='w-5 h-5 mr-2' />
 												Add to Cart
@@ -75,7 +75,7 @@ const FeaturedProducts = ({ featuredProducts }) => {
 						onClick={prevSlide}
 						disabled={isStartDisabled}
 						className={`absolute top-1/2 -left-4 transform -translate-y-1/2 p-2 rounded-full transition-colors duration-300 ${
-							isStartDisabled ? 'hidden' : 'bg-emerald-600 hover:bg-emerald-500'
+							isStartDisabled ? 'hidden' : 'bg-orange-600 hover:bg-orange-500'
 						}`}>
 						<ChevronLeft className='w-6 h-6' />
 					</button>
@@ -84,7 +84,7 @@ const FeaturedProducts = ({ featuredProducts }) => {
 						onClick={nextSlide}
 						disabled={isEndDisabled}
 						className={`absolute top-1/2 -right-4 transform -translate-y-1/2 p-2 rounded-full transition-colors duration-300 ${
-							isEndDisabled ? 'hidden' : 'bg-emerald-600 hover:bg-emerald-500'
+							isEndDisabled ? 'hidden' : 'bg-orange-600 hover:bg-orange-500'
 						}`}>
 						<ChevronRight className='w-6 h-6' />
 					</button>
