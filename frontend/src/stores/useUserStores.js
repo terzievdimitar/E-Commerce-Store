@@ -72,4 +72,35 @@ export const useUserStore = create((set, get) => ({
 	},
 }));
 
-// todo: implement axios interceptors for auth token management
+//! Axios interceptor to handle token refresh
+let refreshPromise = null;
+
+axios.interceptors.request.use(
+	(response) => response,
+	async (error) => {
+		const originalRequest = error.config;
+		if (error.response.status === 401 && !originalRequest._retry) {
+			originalRequest._retry = true;
+
+			try {
+				// If a refresh is already in progress, wait for it to finish
+				if (refreshPromise) {
+					await refreshPromise;
+					return axios(originalRequest);
+				}
+
+				// Start a new refresh process
+				refreshPromise = useUserStore.getState().refreshToken();
+				await refreshPromise;
+				refreshPromise = null; // Reset the promise after completion
+
+				return axios(originalRequest);
+			} catch (refreshError) {
+				// If refresh fails, redirect to login or handle accordingly
+				useUserStore.getState().logout();
+				return Promise.reject(refreshError);
+			}
+		}
+		return Promise.reject(error);
+	}
+);
