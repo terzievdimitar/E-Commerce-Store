@@ -60,6 +60,7 @@ export const useCartStore = create((set, get) => ({
 	},
 
 	clearCart: async () => {
+		await axios.delete('/cart', { data: {} }); // No productId, so clears all
 		set({ cart: [], coupon: null, total: 0, subtotal: 0 });
 	},
 
