@@ -30,12 +30,9 @@ app.use('/api/payments', paymentRoutes);
 app.use('/api/analytics', analyticsRoutes);
 
 if (process.env.NODE_ENV === 'production') {
-	// Serve static files from the React app
-	app.use(express.static(path.join(__dirname, '../frontend/dist')));
-
-	// Handle any requests that don't match the above routes
-	app.get('*', (req, res) => {
-		res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
+	app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
+	app.get('/{*any}', (req, res) => {
+		res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'));
 	});
 }
 

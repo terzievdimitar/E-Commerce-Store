@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { useCartStore } from '../stores/useCartStore';
-import { set } from 'mongoose';
 
 const GiftCouponCard = () => {
 	const [userInputCode, setUserInputCode] = useState('');
