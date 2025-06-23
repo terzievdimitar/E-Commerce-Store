@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
+import path from 'path';
 import { connectDB } from './lib/db.js';
 
 // Importing routes
@@ -16,6 +17,8 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT;
 
+const __dirname = path.resolve();
+
 app.use(express.json({ limit: '50mb' })); // Increased limit for large payloads
 app.use(cookieParser());
 
@@ -25,6 +28,16 @@ app.use('/api/cart', cartRoutes);
 app.use('/api/coupon', couponRoutes);
 app.use('/api/payments', paymentRoutes);
 app.use('/api/analytics', analyticsRoutes);
+
+if (process.env.NODE_ENV === 'production') {
+	// Serve static files from the React app
+	app.use(express.static(path.join(__dirname, '../frontend/dist')));
+
+	// Handle any requests that don't match the above routes
+	app.get('*', (req, res) => {
+		res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
+	});
+}
 
 connectDB().then(() => {
 	app.listen(PORT, () => {
