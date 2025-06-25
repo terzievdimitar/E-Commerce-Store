@@ -31,6 +31,8 @@ Shopr is a full-featured e-commerce application built with the **MERN** stack (M
 	muted />
 ```
 
+https://github.com/terzievdimitar/E-Commerce-Store/blob/main/demo/Shopr-Project-Video.mp4
+
 ## Project Structure
 
 ```
